@@ -47,24 +47,6 @@ if (null == $id) {
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Endereço</label>
-                        <div class="controls form-control disabled">
-                            <label class="carousel-inner">
-                                <?php echo $data['endereco']; ?>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">Telefone</label>
-                        <div class="controls form-control disabled">
-                            <label class="carousel-inner">
-                                <?php echo $data['telefone']; ?>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
                         <label class="control-label">Email</label>
                         <div class="controls form-control disabled">
                             <label class="carousel-inner">
@@ -74,10 +56,10 @@ if (null == $id) {
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Sexo</label>
+                        <label class="control-label">Categoria</label>
                         <div class="controls form-check disabled">
                             <label class="carousel-inner">
-                                <?php echo $data['sexo']; ?>
+                                <?php echo $data['categoria']; ?>
                             </label>
                         </div>
                     </div>

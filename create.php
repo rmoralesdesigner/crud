@@ -7,10 +7,8 @@ require 'banco.php';
 // Processar so quando tenha uma chamada post
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nomeErro = null;
-    $enderecoErro = null;
-    $telefoneErro = null;
     $emailErro = null;
-    $sexoErro = null;
+    $categoriaErro = null;
 
     if (!empty($_POST)) {
         $validacao = True;
@@ -19,22 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $nome = $_POST['nome'];
         } else {
             $nomeErro = 'Por favor digite o seu nome!';
-            $validacao = False;
-        }
-
-
-        if (!empty($_POST['endereco'])) {
-            $endereco = $_POST['endereco'];
-        } else {
-            $enderecoErro = 'Por favor digite o seu endereço!';
-            $validacao = False;
-        }
-
-
-        if (!empty($_POST['telefone'])) {
-            $telefone = $_POST['telefone'];
-        } else {
-            $telefoneErro = 'Por favor digite o número do telefone!';
             $validacao = False;
         }
 
@@ -51,10 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
 
-        if (!empty($_POST['sexo'])) {
-            $sexo = $_POST['sexo'];
+        if (!empty($_POST['categoria'])) {
+            $categoria = $_POST['categoria'];
         } else {
-            $sexoErro = 'Por favor seleccione um campo!';
+            $categoriaErro = 'Por favor selecione uma categoria!';
             $validacao = False;
         }
     }
@@ -63,9 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($validacao) {
         $pdo = Banco::conectar();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "INSERT INTO pessoa (nome, endereco, telefone, email, sexo) VALUES(?,?,?,?,?)";
+        $sql = "INSERT INTO pessoa (nome, email, categoria) VALUES(?,?,?)";
         $q = $pdo->prepare($sql);
-        $q->execute(array($nome, $endereco, $telefone, $email, $sexo));
+        $q->execute(array($nome, $email, $categoria));
         Banco::desconectar();
         header("Location: index.php");
     }
@@ -104,28 +86,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
 
-                    <div class="control-group <?php echo !empty($enderecoErro) ? 'error ' : ''; ?>">
-                        <label class="control-label">Endereço</label>
-                        <div class="controls">
-                            <input size="80" class="form-control" name="endereco" type="text" placeholder="Endereço"
-                                   value="<?php echo !empty($endereco) ? $endereco : ''; ?>">
-                            <?php if (!empty($emailErro)): ?>
-                                <span class="text-danger"><?php echo $enderecoErro; ?></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
-                    <div class="control-group <?php echo !empty($telefoneErro) ? 'error ' : ''; ?>">
-                        <label class="control-label">Telefone</label>
-                        <div class="controls">
-                            <input size="35" class="form-control" name="telefone" type="text" placeholder="Telefone"
-                                   value="<?php echo !empty($telefone) ? $telefone : ''; ?>">
-                            <?php if (!empty($telefoneErro)): ?>
-                                <span class="text-danger"><?php echo $telefoneErro; ?></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
                     <div class="control-group <?php !empty($emailErro) ? '$emailErro ' : ''; ?>">
                         <label class="control-label">Email</label>
                         <div class="controls">
@@ -137,23 +97,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         </div>
                     </div>
 
-                    <div class="control-group <?php !empty($sexoErro) ? 'echo($sexoErro)' : ''; ?>">
+                    <div class="control-group <?php !empty($categoriaErro) ? 'echo($categoriaErro)' : ''; ?>">
                         <div class="controls">
-                            <label class="control-label">Sexo</label>
+                            <label class="control-label">Categoria</label>
                             <div class="form-check">
                                 <p class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="sexo" id="sexo"
-                                           value="M" <?php isset($_POST["sexo"]) && $_POST["sexo"] == "M" ? "checked" : null; ?>/>
-                                    Masculino</p>
+                                    <input class="form-check-input" type="radio" name="categoria" id="categoria"
+                                           value="1" <?php isset($_POST["categoria"]) && $_POST["categoria"] == "1" ? "checked" : null; ?>/>
+                                    Admin</p>
                             </div>
                             <div class="form-check">
                                 <p class="form-check-label">
-                                    <input class="form-check-input" id="sexo" name="sexo" type="radio"
-                                           value="F" <?php isset($_POST["sexo"]) && $_POST["sexo"] == "F" ? "checked" : null; ?>/>
-                                    Feminino</p>
+                                    <input class="form-check-input" id="categoria" name="categoria" type="radio"
+                                           value="2" <?php isset($_POST["categoria"]) && $_POST["categoria"] == "2" ? "checked" : null; ?>/>
+                                    Gerente</p>
                             </div>
-                            <?php if (!empty($sexoErro)): ?>
-                                <span class="help-inline text-danger"><?php echo $sexoErro; ?></span>
+                            <div class="form-check">
+                                <p class="form-check-label">
+                                    <input class="form-check-input" id="categoria" name="categoria" type="radio"
+                                           value="3" <?php isset($_POST["categoria"]) && $_POST["categoria"] == "3" ? "checked" : null; ?>/>
+                                    Normal</p>
+                            </div>
+                            <?php if (!empty($categoriaErro)): ?>
+                                <span class="help-inline text-danger"><?php echo $categoriaErro; ?></span>
                             <?php endif; ?>
                         </div>
                     </div>

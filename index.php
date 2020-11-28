@@ -25,28 +25,24 @@
                         <tr>
                             <th scope="col">Id</th>
                             <th scope="col">Nome</th>
-                            <th scope="col">Endereço</th>
-                            <th scope="col">Telefone</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Sexo</th>
-                            <th scope="col">Ação</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         include 'banco.php';
                         $pdo = Banco::conectar();
-                        $sql = 'SELECT * FROM pessoa ORDER BY id DESC';
+                        $sql = 'SELECT * FROM pessoa ORDER BY id ASC';
 
                         foreach($pdo->query($sql)as $row)
                         {
                             echo '<tr>';
 			                      echo '<th scope="row">'. $row['id'] . '</th>';
                             echo '<td>'. $row['nome'] . '</td>';
-                            echo '<td>'. $row['endereco'] . '</td>';
-                            echo '<td>'. $row['telefone'] . '</td>';
                             echo '<td>'. $row['email'] . '</td>';
-                            echo '<td>'. $row['sexo'] . '</td>';
+                            echo '<td>'. $row['categoria'] . '</td>';
                             echo '<td width=250>';
                             echo '<a class="btn btn-primary" href="read.php?id='.$row['id'].'">Info</a>';
                             echo ' ';

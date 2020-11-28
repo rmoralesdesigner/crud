@@ -14,16 +14,12 @@ if (null == $id) {
 if (!empty($_POST)) {
 
     $nomeErro = null;
-    $enderecoErro = null;
-    $telefoneErro = null;
     $emailErro = null;
-    $sexoErro = null;
+    $categoriaErro = null;
 
     $nome = $_POST['nome'];
-    $endereco = $_POST['endereco'];
-    $telefone = $_POST['telefone'];
     $email = $_POST['email'];
-    $sexo = $_POST['sexo'];
+    $categoria = $_POST['categoria'];
 
     //Validação
     $validacao = true;
@@ -40,18 +36,8 @@ if (!empty($_POST)) {
         $validacao = false;
     }
 
-    if (empty($endereco)) {
-        $enderecoErro = 'Por favor digite o endereço!';
-        $validacao = false;
-    }
-
-    if (empty($telefone)) {
-        $telefoneErro = 'Por favor digite o telefone!';
-        $validacao = false;
-    }
-
-    if (empty($sexo)) {
-        $sexoErro = 'Por favor preenche o campo!';
+    if (empty($categoria)) {
+        $categoriaErro = 'Por favor selecione a categoria!';
         $validacao = false;
     }
 
@@ -59,9 +45,9 @@ if (!empty($_POST)) {
     if ($validacao) {
         $pdo = Banco::conectar();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "UPDATE pessoa  set nome = ?, endereco = ?, telefone = ?, email = ?, sexo = ? WHERE id = ?";
+        $sql = "UPDATE pessoa  set nome = ?, email = ?, categoria = ? WHERE id = ?";
         $q = $pdo->prepare($sql);
-        $q->execute(array($nome, $endereco, $telefone, $email, $sexo, $id));
+        $q->execute(array($nome, $email, $categoria, $id));
         Banco::desconectar();
         header("Location: index.php");
     }
@@ -73,10 +59,8 @@ if (!empty($_POST)) {
     $q->execute(array($id));
     $data = $q->fetch(PDO::FETCH_ASSOC);
     $nome = $data['nome'];
-    $endereco = $data['endereco'];
-    $telefone = $data['telefone'];
     $email = $data['email'];
-    $sexo = $data['sexo'];
+    $categoria = $data['categoria'];
     Banco::desconectar();
 }
 ?>
@@ -117,28 +101,6 @@ if (!empty($_POST)) {
                         </div>
                     </div>
 
-                    <div class="control-group <?php echo !empty($enderecoErro) ? 'error' : ''; ?>">
-                        <label class="control-label">Endereço</label>
-                        <div class="controls">
-                            <input name="endereco" class="form-control" size="80" type="text" placeholder="Endereço"
-                                   value="<?php echo !empty($endereco) ? $endereco : ''; ?>">
-                            <?php if (!empty($enderecoErro)): ?>
-                                <span class="text-danger"><?php echo $enderecoErro; ?></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
-                    <div class="control-group <?php echo !empty($telefoneErro) ? 'error' : ''; ?>">
-                        <label class="control-label">Telefone</label>
-                        <div class="controls">
-                            <input name="telefone" class="form-control" size="30" type="text" placeholder="Telefone"
-                                   value="<?php echo !empty($telefone) ? $telefone : ''; ?>">
-                            <?php if (!empty($telefoneErro)): ?>
-                                <span class="text-danger"><?php echo $telefoneErro; ?></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
                     <div class="control-group <?php echo !empty($emailErro) ? 'error' : ''; ?>">
                         <label class="control-label">Email</label>
                         <div class="controls">
@@ -150,21 +112,25 @@ if (!empty($_POST)) {
                         </div>
                     </div>
 
-                    <div class="control-group <?php echo !empty($sexoErro) ? 'error' : ''; ?>">
-                        <label class="control-label">Sexo</label>
+                    <div class="control-group <?php echo !empty($categoriaErro) ? 'error' : ''; ?>">
+                        <label class="control-label">categoria</label>
                         <div class="controls">
                             <div class="form-check">
                                 <p class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="sexo" id="sexo"
-                                           value="M" <?php echo ($sexo == "M") ? "checked" : null; ?>/> Masculino
+                                    <input class="form-check-input" type="radio" name="categoria" id="categoria"
+                                           value="1" <?php echo ($categoria == "1") ? "checked" : null; ?>/> Admin
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="sexo" id="sexo"
-                                       value="F" <?php echo ($sexo == "F") ? "checked" : null; ?>/> Feminino
+                                <input class="form-check-input" type="radio" name="categoria" id="categoria"
+                                       value="2" <?php echo ($categoria == "2") ? "checked" : null; ?>/> Gerente
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="categoria" id="categoria"
+                                       value="3" <?php echo ($categoria == "3") ? "checked" : null; ?>/> Normal
                             </div>
                             </p>
-                            <?php if (!empty($sexoErro)): ?>
-                                <span class="text-danger"><?php echo $sexoErro; ?></span>
+                            <?php if (!empty($categoriaErro)): ?>
+                                <span class="text-danger"><?php echo $categoriaErro; ?></span>
                             <?php endif; ?>
                         </div>
                     </div>
