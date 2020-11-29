@@ -67,70 +67,76 @@ if (!empty($_POST)) {
 
 <?php include('header.php'); ?>
 
+<div class="jumbotron bg-danger">
+
+    <div class="container">
+    
+        <h1 class="display-4 text-light">Editar usuário</h1>
+
+  </div>
+
+</div>
+
 <div class="container">
 
-    <div class="span10 offset1">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="well"> Atualizar Contato </h3>
-            </div>
-            <div class="card-body">
-                <form class="form-horizontal" action="update.php?id=<?php echo $id ?>" method="post">
+    <form class="form-row" action="update.php?id=<?php echo $id ?>" method="post">
 
-                    <div class="control-group <?php echo !empty($nomeErro) ? 'error' : ''; ?>">
-                        <label class="control-label">Nome</label>
-                        <div class="controls">
-                            <input name="nome" class="form-control" size="50" type="text" placeholder="Nome"
-                                   value="<?php echo !empty($nome) ? $nome : ''; ?>">
-                            <?php if (!empty($nomeErro)): ?>
-                                <span class="text-danger"><?php echo $nomeErro; ?></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+        <div class="form-group col-12 col-lg-6 <?php echo !empty($nomeErro) ? 'error ' : ''; ?>">
 
-                    <div class="control-group <?php echo !empty($emailErro) ? 'error' : ''; ?>">
-                        <label class="control-label">Email</label>
-                        <div class="controls">
-                            <input name="email" class="form-control" size="40" type="text" placeholder="Email"
-                                   value="<?php echo !empty($email) ? $email : ''; ?>">
-                            <?php if (!empty($emailErro)): ?>
-                                <span class="text-danger"><?php echo $emailErro; ?></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+            <label class="text-warning" for="Nome">Nome</label>
 
-                    <div class="control-group <?php echo !empty($categoriaErro) ? 'error' : ''; ?>">
-                        <label class="control-label">categoria</label>
-                        <div class="controls">
-                            <div class="form-check">
-                                <p class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="categoria" id="categoria"
-                                           value="1" <?php echo ($categoria == "1") ? "checked" : null; ?>/> Admin
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="categoria" id="categoria"
-                                       value="2" <?php echo ($categoria == "2") ? "checked" : null; ?>/> Gerente
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="categoria" id="categoria"
-                                       value="3" <?php echo ($categoria == "3") ? "checked" : null; ?>/> Normal
-                            </div>
-                            </p>
-                            <?php if (!empty($categoriaErro)): ?>
-                                <span class="text-danger"><?php echo $categoriaErro; ?></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+            <input type="text" class="form-control" name="nome" id="Nome" placeholder="João da Silva" value="<?php echo !empty($nome) ? $nome : ''; ?>">
 
-                    <br/>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-warning">Atualizar</button>
-                        <a href="index.php" type="btn" class="btn btn-default">Voltar</a>
-                    </div>
-                </form>
-            </div>
+            <?php if (!empty($nomeErro)): ?>
+                <span class="text-danger"><?php echo $nomeErro; ?></span>
+            <?php endif; ?>``
+
         </div>
-    </div>
+
+        <div class="form-group col-12 col-lg-6 <?php echo !empty($emailErro) ? 'error ' : ''; ?>">
+
+            <label class="text-warning" for="Email">Email</label>
+
+            <input type="email" class="form-control" name="email" id="Email" placeholder="joao@gmail.com" value="<?php echo !empty($email) ? $email : ''; ?>">
+
+            <?php if (!empty($emailErro)): ?>
+                <span class="text-danger"><?php echo $emailErro; ?></span>
+            <?php endif; ?>``
+
+        </div>
+
+        <div class="form-group col-12 <?php !empty($categoriaErro) ? 'echo($categoriaErro)' : ''; ?>">
+
+            <p class="text-warning">Categoria</p>
+        
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="categoria" id="inlineRadio1" value="1" <?php echo ($categoria == "1") ? "checked" : null; ?>>
+                <label class="form-check-label text-light" for="inlineRadio1">Admin</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="categoria" id="inlineRadio2" value="2" <?php echo ($categoria == "2") ? "checked" : null; ?>>
+                <label class="form-check-label text-light" for="inlineRadio2">Gerente</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="categoria" id="inlineRadio3" value="3" <?php echo ($categoria == "3") ? "checked" : null; ?>>
+                <label class="form-check-label text-light" for="inlineRadio3">Normal</label>
+            </div>
+
+        </div>
+        
+        <div class="d-flex justify-content-between align-items-center col-12 mt-5">
+        
+        <button type="submit" class="btn btn-success btn-lg rounded-pill text-uppercase px-5">Salvar</button>
+        <a href="index.php" type="btn" class="text-light">Voltar</a>
+
+        </div>
+
+        
+    </form>
+
 </div>
+
 
 <?php include('footer.php'); ?>

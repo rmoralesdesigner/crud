@@ -25,21 +25,31 @@ if(!empty($_POST))
 
 <?php include('header.php'); ?>
 
-        <div class="container">
-            <div class="span10 offset1">
-                <div class="row">
-                    <h3 class="well">Excluir Contato</h3>
-                </div>
-                <form class="form-horizontal" action="delete.php" method="post">
-                    <input type="hidden" name="id" value="<?php echo $id;?>" />
-                    <div class="alert alert-danger"> Deseja excluir o contato?
-                    </div>
-                    <div class="form actions">
-                        <button type="submit" class="btn btn-danger">Sim</button>
-                        <a href="index.php" type="btn" class="btn btn-default">Não</a>
-                    </div>
-                </form>
-            </div>
+<div class="jumbotron bg-danger">
+
+    <div class="container">
+    
+        <h1 class="display-4 text-light">Excluir usuário</h1>
+
+  </div>
+
+</div>
+
+<div class="container">
+
+    <h3 class="text-light">Tem certeza que deseja excluir o usuário?</h3>
+
+    <form class="form-horizontal" action="delete.php" method="post">
+
+        <input type="hidden" name="id" value="<?php echo $id;?>" />
+
+        <div class="form actions">
+            <button type="submit" class="btn btn-danger btn-lg rounded-pill text-uppercase px-5">Sim</button>
+            <a href="index.php" type="btn" class="btn btn-default text-light">Não</a>
         </div>
+
+    </form>
+
+</div>
 
 <?php include('footer.php'); ?>

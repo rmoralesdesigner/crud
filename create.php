@@ -57,73 +57,75 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <?php include('header.php'); ?>
 
-<div class="container">
-    <div clas="span10 offset1">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="well"> Adicionar Contato </h3>
-            </div>
-            <div class="card-body">
-                <form class="form-horizontal" action="create.php" method="post">
+<div class="jumbotron bg-danger">
 
-                    <div class="control-group  <?php echo !empty($nomeErro) ? 'error ' : ''; ?>">
-                        <label class="control-label">Nome</label>
-                        <div class="controls">
-                            <input size="50" class="form-control" name="nome" type="text" placeholder="Nome"
-                                   value="<?php echo !empty($nome) ? $nome : ''; ?>">
-                            <?php if (!empty($nomeErro)): ?>
-                                <span class="text-danger"><?php echo $nomeErro; ?></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+    <div class="container">
+    
+        <h1 class="display-4 text-light">Adicionar usuário</h1>
 
-                    <div class="control-group <?php !empty($emailErro) ? '$emailErro ' : ''; ?>">
-                        <label class="control-label">Email</label>
-                        <div class="controls">
-                            <input size="40" class="form-control" name="email" type="text" placeholder="Email"
-                                   value="<?php echo !empty($email) ? $email : ''; ?>">
-                            <?php if (!empty($emailErro)): ?>
-                                <span class="text-danger"><?php echo $emailErro; ?></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
+  </div>
 
-                    <div class="control-group <?php !empty($categoriaErro) ? 'echo($categoriaErro)' : ''; ?>">
-                        <div class="controls">
-                            <label class="control-label">Categoria</label>
-                            <div class="form-check">
-                                <p class="form-check-label">
-                                    <input class="form-check-input" type="radio" name="categoria" id="categoria"
-                                           value="1" <?php isset($_POST["categoria"]) && $_POST["categoria"] == "1" ? "checked" : null; ?>/>
-                                    Admin</p>
-                            </div>
-                            <div class="form-check">
-                                <p class="form-check-label">
-                                    <input class="form-check-input" id="categoria" name="categoria" type="radio"
-                                           value="2" <?php isset($_POST["categoria"]) && $_POST["categoria"] == "2" ? "checked" : null; ?>/>
-                                    Gerente</p>
-                            </div>
-                            <div class="form-check">
-                                <p class="form-check-label">
-                                    <input class="form-check-input" id="categoria" name="categoria" type="radio"
-                                           value="3" <?php isset($_POST["categoria"]) && $_POST["categoria"] == "3" ? "checked" : null; ?>/>
-                                    Normal</p>
-                            </div>
-                            <?php if (!empty($categoriaErro)): ?>
-                                <span class="help-inline text-danger"><?php echo $categoriaErro; ?></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <br/>
-                        <button type="submit" class="btn btn-success">Adicionar</button>
-                        <a href="index.php" type="btn" class="btn btn-default">Voltar</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
+
+<div class="container">
+
+    <form class="form-row" action="create.php" method="post">
+
+        <div class="form-group col-12 col-lg-6 <?php echo !empty($nomeErro) ? 'error ' : ''; ?>">
+
+            <label class="text-warning" for="Nome">Nome</label>
+
+            <input type="text" class="form-control" name="nome" id="Nome" placeholder="João da Silva" value="<?php echo !empty($nome) ? $nome : ''; ?>">
+
+            <?php if (!empty($nomeErro)): ?>
+                <span class="text-danger"><?php echo $nomeErro; ?></span>
+            <?php endif; ?>``
+
+        </div>
+
+        <div class="form-group col-12 col-lg-6 <?php echo !empty($emailErro) ? 'error ' : ''; ?>">
+
+            <label class="text-warning" for="Email">Email</label>
+
+            <input type="email" class="form-control" name="email" id="Email" placeholder="joao@gmail.com" value="<?php echo !empty($email) ? $email : ''; ?>">
+
+            <?php if (!empty($emailErro)): ?>
+                <span class="text-danger"><?php echo $emailErro; ?></span>
+            <?php endif; ?>``
+
+        </div>
+
+        <div class="form-group col-12 <?php !empty($categoriaErro) ? 'echo($categoriaErro)' : ''; ?>">
+
+            <p class="text-warning">Categoria</p>
+        
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="categoria" id="inlineRadio1" value="1" <?php isset($_POST["categoria"]) && $_POST["categoria"] == "1" ? "checked" : null; ?>>
+                <label class="form-check-label text-light" for="inlineRadio1">Admin</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="categoria" id="inlineRadio2" value="2" <?php isset($_POST["categoria"]) && $_POST["categoria"] == "2" ? "checked" : null; ?>>
+                <label class="form-check-label text-light" for="inlineRadio2">Gerente</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="categoria" id="inlineRadio3" value="3" <?php isset($_POST["categoria"]) && $_POST["categoria"] == "3" ? "checked" : null; ?>>
+                <label class="form-check-label text-light" for="inlineRadio3">Normal</label>
+            </div>
+
+        </div>
+        
+        <div class="d-flex justify-content-between align-items-center col-12 mt-5">
+        
+        <button type="submit" class="btn btn-success btn-lg rounded-pill text-uppercase px-5">Salvar</button>
+        <a href="index.php" type="btn" class="text-light">Voltar</a>
+
+        </div>
+
+        
+    </form>
+
 </div>
 
 <?php include('footer.php'); ?>
